@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Lampe Torche</string>
+    <string name="widget_name">Lampe Torche</string>
+    <string name="title">Appuyer sur l\'ampoule pour allumer</string>
+	<string name="button"></string>
+	<string name="explain">Appuyer sur l\'ampoule pour lancer la lumière. Appuyer ensuite sur l\'écran pour l\'éteindre.</string>
+
+	<string name="Ok">OK</string>
+	<string name="changelog_title">Nouveautés</string>
+	<string name="about_title">A propos</string>
+
+	<string name="share_with">Partager avec&#8230;</string>
+	<string name="share_title">Un ami vous recommande&#8230;</string>
+	<string name="share_link">http://market.android.com/details?id=com.kiof.flashlight</string>
+	
+	<string name="other_link">market://search?q=pub:Kiof</string>
+	
+	<string name="menuTitle1">Options</string>
+	<string name="menuTitleCondensed1">Options</string>
+	<string name="menuTitle2">Envoyer à un ami</string>
+	<string name="menuTitleCondensed2">Partager</string>
+	<string name="menuTitle3">Plus d\'applications gratuites</string>
+	<string name="menuTitleCondensed3">Plus d\'applications</string>
+	<string name="menuTitle4">A propos&#8230;</string>
+	<string name="menuTitleCondensed4">A propos</string>
+	<string name="menuTitle5">Quitter l\'application</string>
+	<string name="menuTitleCondensed5">Quitter</string>
+
+	<string name="preference_category_features">Fonctionnement</string>
+	<string name="sound_title">Son</string>
+	<string name="sound_summary">Jouer les sons de l\'application</string>
+	<string name="autowidget_title">Widget automatique</string>
+	<string name="autowidget_summary">Lancement automatique de la lumière à partir du Widget</string>
+	<string name="save_setting">Enregistrer les paramètres</string>
+	<string name="setting_saved">Paramètres enregistrés</string>
+
+</resources>

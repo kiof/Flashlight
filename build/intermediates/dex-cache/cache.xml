@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="D:\Temp\Android\ASProjects\Flashlight\flashlight\build\intermediates\pre-dexed\debug\classes-efa5345aa317bd30423ee695210824977512e367.jar"
+        jar="D:\Temp\Android\ASProjects\Flashlight\flashlight\build\intermediates\exploded-aar\com.google.android.gms\play-services\5.0.77\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="b6a82434c1eca686607867cd906bcc80ed987837"/>
+    <item
+        dex="D:\Temp\Android\ASProjects\Flashlight\flashlight\build\intermediates\pre-dexed\debug\support-v4-19.1.0-33f6d4e2ac35778c92ee7ff2380b795f206df90f.jar"
+        jar="D:\Temp\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+    <item
+        dex="D:\Temp\Android\ASProjects\Flashlight\flashlight\build\intermediates\pre-dexed\debug\classes-2f73a9438ef63b4cbf74b62a54c77bf178682cab.jar"
+        jar="D:\Temp\Android\ASProjects\Flashlight\flashlight\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
+
+</pre-dex-items>
