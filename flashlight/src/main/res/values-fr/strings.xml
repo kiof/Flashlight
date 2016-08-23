@@ -3,9 +3,7 @@
 
     <string name="app_name">Lampe Torche</string>
     <string name="widget_name">Lampe Torche</string>
-    <string name="title">Appuyer sur l\'ampoule pour allumer</string>
 	<string name="button"></string>
-	<string name="explain">Appuyer sur l\'ampoule pour lancer la lumière. Appuyer ensuite sur l\'écran pour l\'éteindre.</string>
 
 	<string name="Ok">OK</string>
 	<string name="changelog_title">Nouveautés</string>
@@ -31,8 +29,8 @@
 	<string name="preference_category_features">Fonctionnement</string>
 	<string name="sound_title">Son</string>
 	<string name="sound_summary">Jouer les sons de l\'application</string>
-	<string name="autowidget_title">Widget automatique</string>
-	<string name="autowidget_summary">Lancement automatique de la lumière à partir du Widget</string>
+	<string name="autolight_title">Allumage automatique</string>
+	<string name="autolight_summary">Lancement automatique de la lumière au démarrage de l\'application</string>
 	<string name="save_setting">Enregistrer les paramètres</string>
 	<string name="setting_saved">Paramètres enregistrés</string>
 

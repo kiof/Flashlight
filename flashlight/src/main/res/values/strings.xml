@@ -3,9 +3,7 @@
 
     <string name="app_name">FlashLight</string>
     <string name="widget_name">FlashLight</string>
-    <string name="title">Push the bulb to switch on</string>
 	<string name="button"></string>
-	<string name="explain">Press the button to switch on the light. Then press on the screen to switch off.</string>
 
     <string name="ad_unit_id" translatable="false">ca-app-pub-3294765052683520/5951031203</string>
 
@@ -39,8 +37,8 @@
 	<string name="preference_category_features">Features</string>
 	<string name="sound_title">Sound</string>
 	<string name="sound_summary">Play sounds of the application</string>
-	<string name="autowidget_title">Widget automatic</string>
-	<string name="autowidget_summary">Automatically switch on the light when launched from the Widget</string>
+	<string name="autolight_title">Automatic Light</string>
+	<string name="autolight_summary">Automatically switch on the light when launch the application</string>
 	<string name="save_setting">Save settings</string>
 	<string name="setting_saved">Settings saved</string>
 

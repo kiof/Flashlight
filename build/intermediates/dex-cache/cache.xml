@@ -2,74 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\jars\classes.jar"
-        jumboMode="false"
+        jar="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
         revision="24.0.1"
-        sha1="3dee4ce5844d39d843d503fb8fe04e51e5bfffac">
-        <dex dex="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-base-9.4.0_e245b3cdfbfb63ca2957c4962afc2638565fcc93.jar" />
-    </item>
-    <item
-        jar="C:\Utilisateurs\fr20222\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.0\support-annotations-23.0.0.jar"
-        jumboMode="false"
-        revision="24.0.1"
-        sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
-        <dex dex="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\pre-dexed\release\support-annotations-23.0.0_ecb36c7c6620b0fe882ab5a805be2b01653baf6e.jar" />
-    </item>
-    <item
-        jar="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\9.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="24.0.1"
-        sha1="d463d8eec1e6c1feef2cec6675ccb47e37c12ee1">
-        <dex dex="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-ads-9.4.0_78cd972e8b1bc5669693b504d72123334aa03cf0.jar" />
-    </item>
-    <item
-        jar="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="24.0.1"
-        sha1="618485fef3ebe12127f7622abbc9b5b39057b5c2">
-        <dex dex="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-basement-9.4.0_68e9a0b9ef1237d5d9108a5c12475fdc94d5daea.jar" />
-    </item>
-    <item
-        jar="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\exploded-aar\com.google.android.gms\play-services-clearcut\9.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="24.0.1"
-        sha1="dd763e0269f2854f5828ae62dd968b80bff6a0db">
-        <dex dex="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-clearcut-9.4.0_398699df5ada0619e84bdd0b49114db7a44a9de9.jar" />
-    </item>
-    <item
-        jar="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\exploded-aar\com.google.android.gms\play-services-gass\9.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="24.0.1"
-        sha1="b15f898c9047f9d612a63000126b485dd024eaac">
-        <dex dex="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-gass-9.4.0_dc0d3eacbe27d06206c81c9563d436a0f1f8af41.jar" />
-    </item>
-    <item
-        jar="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads-lite\9.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="24.0.1"
-        sha1="147edbec6bcea71fd675ecc63cae3319637ec2b4">
-        <dex dex="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-ads-lite-9.4.0_90d761a2a0a6d4917572d66aed3a667851ca8ca5.jar" />
-    </item>
-    <item
-        jar="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="24.0.1"
-        sha1="8a36d229011e75f0caef408e1adf0d3fd4d94e02">
-        <dex dex="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-tasks-9.4.0_f0abf34210449794ca23c887b030deec4667e15c.jar" />
-    </item>
-    <item
-        jar="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="24.0.1"
-        sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
-        <dex dex="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\pre-dexed\release\com.android.support-support-v4-23.0.0_c4dabc6b0bd835a86cac68ef8232639fda93e60b.jar" />
-    </item>
-    <item
-        jar="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\libs\internal_impl-23.0.0.jar"
-        jumboMode="false"
-        revision="24.0.1"
-        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
-        <dex dex="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\pre-dexed\release\internal_impl-23.0.0_6df8fb5971dd9ab4b4ce1748b05fb07857c7f27d.jar" />
+        sha1="be0b1ea39908511a0b913855fce01f12b97943f6">
+        <dex dex="C:\Utilisateurs\fr20222\Temp\AndroidStudioProjects\Flashlight\flashlight\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_975b57f6735ff0dbb4eea1f29d5b621f45da2358\classes.dex" />
     </item>
 
 </items>

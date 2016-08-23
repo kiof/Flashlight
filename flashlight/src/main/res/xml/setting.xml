@@ -4,6 +4,6 @@
 		<CheckBoxPreference android:key="sound" android:defaultValue="true"
 			android:title="@string/sound_title" android:summary="@string/sound_summary" />
 		<CheckBoxPreference android:key="autowidget" android:defaultValue="true"
-			android:title="@string/autowidget_title" android:summary="@string/autowidget_summary" />
+			android:title="@string/autolight_title" android:summary="@string/autolight_summary" />
 	</PreferenceCategory>
 </PreferenceScreen>

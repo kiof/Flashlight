@@ -1,71 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/profileSwitcher"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    tools:context=".Flashlight" >
 
-    <LinearLayout
-        android:id="@+id/background"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/bg"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/ad_unit_id" />
 
-        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="@string/ad_unit_id" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_margin="@dimen/titlemargin"
-            android:gravity="center"
-            android:text="@string/title"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/white" />
-
-        <FrameLayout
-            android:id="@+id/buttonframe"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:onClick="switchOn" >
-
-            <ImageView
-                android:id="@+id/button"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                android:src="@drawable/button"
-                android:contentDescription="@string/app_name" />
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/explain"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_margin="@dimen/explainmargin"
-            android:gravity="center"
-            android:text="@string/explain"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/white" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/light"
+    <FrameLayout
+        android:id="@+id/buttonframe"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@color/white"
-        android:keepScreenOn="true"
-        android:onClick="switchOff" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:onClick="toggleLight">
 
-</ViewSwitcher>
+        <ImageView
+            android:id="@+id/button"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:src="@drawable/button" />
+
+    </FrameLayout>
+
+    <SurfaceView
+        android:id="@+id/surfaceview"
+        android:layout_width="1dip"
+        android:layout_height="1dip" />
+
+
+</LinearLayout>
