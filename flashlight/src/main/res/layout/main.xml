@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    tools:context=".Flashlight" >
+    tools:context=".Flashlight">
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
@@ -17,28 +17,19 @@
         ads:adSize="SMART_BANNER"
         ads:adUnitId="@string/ad_unit_id" />
 
-    <FrameLayout
-        android:id="@+id/buttonframe"
+    <ImageView
+        android:id="@+id/button"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:onClick="toggleLight">
-
-        <ImageView
-            android:id="@+id/button"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:contentDescription="@string/app_name"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button" />
-
-    </FrameLayout>
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:contentDescription="@string/app_name"
+        android:onClick="toggleLight"
+        android:scaleType="fitCenter"
+        android:src="@drawable/buttonoff" />
 
     <SurfaceView
         android:id="@+id/surfaceview"
         android:layout_width="1dip"
         android:layout_height="1dip" />
-
 
 </LinearLayout>

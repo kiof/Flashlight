@@ -27,6 +27,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -35,45 +36,46 @@ import java.io.IOException;
 import java.util.List;
 
 public final class Flashlight extends AppCompatActivity implements SurfaceHolder.Callback {
-	private Context mContext;
-	private SharedPreferences mSharedPreferences;
-	private Camera mCamera;
+    private Context mContext;
+    private SharedPreferences mSharedPreferences;
+    private Camera mCamera;
     private SurfaceHolder mHolder;
-	private View mButton;
+    private ImageView mButton;
     private AdView mAdView;
 
-	private static final String SOUND = "sound";
-	private static final String TAG = "FLASHLIGHT";
-	private static final int REQUEST_CAMERA=1;
+    private static final String SOUND = "sound";
+    private static final String AUTOLIGHT = "autolight";
+    private static final String TAG = "FLASHLIGHT";
+    private static final int REQUEST_CAMERA = 1;
 
-	private static final int COLOR_DARK = 0x00000000;
-	private static final int COLOR_LIGHT = 0xFFFFFFFF;
+    private static final int COLOR_DARK = 0x00000000;
+    private static final int COLOR_LIGHT = 0xFFFFFFFF;
 
     private boolean lightOn;
     private boolean useCamera;
 
-	private PowerManager.WakeLock wakeLock;
+    private PowerManager.WakeLock wakeLock;
 
-	private static Flashlight flashlight;
+    private static Flashlight flashlight;
 
-	public Flashlight() {
-		super();
-		flashlight = this;
-	}
+    public Flashlight() {
+        super();
+        flashlight = this;
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		mContext = getApplicationContext();
-		setContentView(R.layout.main);
+        mContext = getApplicationContext();
+        setContentView(R.layout.main);
 
 //        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(myToolbar);
 
         // Get Preferences
-		PreferenceManager.setDefaultValues(mContext, R.xml.setting, false);
-		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        PreferenceManager.setDefaultValues(mContext, R.xml.setting, false);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 
         mAdView = (AdView) this.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
@@ -82,29 +84,30 @@ public final class Flashlight extends AppCompatActivity implements SurfaceHolder
                 .build();
         mAdView.loadAd(adRequest);
 
-		mButton = this.findViewById(R.id.button);
+        mButton = (ImageView) this.findViewById(R.id.button);
 
-		SurfaceView surfaceView = (SurfaceView) this.findViewById(R.id.surfaceview);
-		SurfaceHolder surfaceHolder = surfaceView.getHolder();
-		surfaceHolder.addCallback(this);
-		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        SurfaceView surfaceView = (SurfaceView) this.findViewById(R.id.surfaceview);
+        SurfaceHolder surfaceHolder = surfaceView.getHolder();
+        surfaceHolder.addCallback(this);
+//		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-		// Disable Phone Sleep
+        // Disable Phone Sleep
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-		// Display change log if new version
-		ChangeLog cl = new ChangeLog(this);
-		if (cl.firstRun())
-			new HtmlAlertDialog(this, R.raw.about,
-					getString(R.string.about_title),
-					android.R.drawable.ic_menu_info_details).show();
+        // Display change log if new version
+        ChangeLog cl = new ChangeLog(this);
+        if (cl.firstRun())
+            new HtmlAlertDialog(this, R.raw.about,
+                    getString(R.string.about_title),
+                    android.R.drawable.ic_menu_info_details).show();
 
-		// Background music
-		if (mSharedPreferences.getBoolean(SOUND, false))
-			playSound(R.raw.bgmusic);
+        // Background music
+        if (mSharedPreferences.getBoolean(SOUND, false))
+            playSound(R.raw.bgmusic);
 
-        if (checkCameraHardware(mContext)) {
-            // Manage CAMERA permission
+        // Check if this device has a camera flash
+        if (mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+            // Manage camera permission
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
             } else {
@@ -113,61 +116,60 @@ public final class Flashlight extends AppCompatActivity implements SurfaceHolder
         }
     }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
-		switch (item.getItemId()) {
-		case R.id.setting:
-			int RETURN_SETTING = 1;
-			startActivityForResult(new Intent(Flashlight.this, Setting.class), RETURN_SETTING);
-			return true;
-		case R.id.share:
-			Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-			sharingIntent.setType("text/plain");
-			sharingIntent.putExtra(Intent.EXTRA_TITLE, getString(R.string.share_title));
-			sharingIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_title));
-			sharingIntent.putExtra(Intent.EXTRA_TEMPLATE, Html.fromHtml(getString(R.string.share_link)));
-			sharingIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(getString(R.string.share_link)));
-			startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_with)));
-			return true;
-		case R.id.about:
-			new HtmlAlertDialog(this, R.raw.about, getString(R.string.about_title), android.R.drawable.ic_menu_info_details).show();
-			return true;
-		case R.id.other:
-			Intent otherIntent = new Intent(Intent.ACTION_VIEW);
-			otherIntent.setData(Uri.parse(getString(R.string.other_link)));
-			startActivity(otherIntent);
-			return true;
-		case R.id.quit:
-			finish();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.setting:
+                startActivityForResult(new Intent(Flashlight.this, Setting.class), 1);
+                return true;
+            case R.id.share:
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(Intent.EXTRA_TITLE, getString(R.string.share_title));
+                sharingIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_title));
+                sharingIntent.putExtra(Intent.EXTRA_TEMPLATE, Html.fromHtml(getString(R.string.share_link)));
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(getString(R.string.share_link)));
+                startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_with)));
+                return true;
+            case R.id.about:
+                new HtmlAlertDialog(this, R.raw.about, getString(R.string.about_title), android.R.drawable.ic_menu_info_details).show();
+                return true;
+            case R.id.other:
+                Intent otherIntent = new Intent(Intent.ACTION_VIEW);
+                otherIntent.setData(Uri.parse(getString(R.string.other_link)));
+                startActivity(otherIntent);
+                return true;
+            case R.id.quit:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-	public void toggleLight(View view) {
-		if (lightOn) {
-			turnLightOff();
-		} else {
-			turnLightOn();
-		}
-	}
+    public void toggleLight(View view) {
+        if (lightOn) {
+            turnLightOff();
+        } else {
+            turnLightOn();
+        }
+    }
 
-	private void turnLightOn() {
+    private void turnLightOn() {
 //		Toast.makeText(getApplicationContext(), "On", Toast.LENGTH_SHORT).show();
 
         if (useCamera) {
-			if (mCamera == null) {
+            if (mCamera == null) {
                 mCamera = getCameraInstance();
-                if (mCamera != null) {
+                if (mCamera != null && mHolder != null) {
                     try {
                         mCamera.setPreviewDisplay(mHolder);
                     } catch (IOException e) {
@@ -177,43 +179,44 @@ public final class Flashlight extends AppCompatActivity implements SurfaceHolder
             }
 
             if (mCamera != null) {
-				Log.d(TAG, "mCamera != null");
-				Parameters parameters = mCamera.getParameters();
-				if (parameters != null) {
-					Log.d(TAG, "parameters != null");
-					List<String> flashModes = parameters.getSupportedFlashModes();
-					// Check if camera flash exists
-					if (flashModes != null) {
-						Log.d(TAG, "flashModes != null");
-						String flashMode = parameters.getFlashMode();
-						if (!Parameters.FLASH_MODE_TORCH.equals(flashMode)) {
-							Log.d(TAG, "!Parameters.FLASH_MODE_TORCH.equals(flashMode)");
-							// Turn on the flash
-							if (flashModes.contains(Parameters.FLASH_MODE_TORCH)) {
-								Log.d(TAG, "flashModes.contains(Parameters.FLASH_MODE_TORCH)");
-								parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
-								mCamera.setParameters(parameters);
-								mCamera.startPreview();
-								if (mSharedPreferences.getBoolean(SOUND, false)) playSound(R.raw.on);
-								startWakeLock();
-                                mButton.setBackgroundColor(COLOR_LIGHT);
-								lightOn = true;
-								return;
-							}
-						}
-					}
-				}
-			}
-		}
+                Log.d(TAG, "mCamera != null");
+                Parameters parameters = mCamera.getParameters();
+                if (parameters != null) {
+                    Log.d(TAG, "parameters != null");
+                    List<String> flashModes = parameters.getSupportedFlashModes();
+                    // Check if camera flash exists
+                    if (flashModes != null) {
+                        Log.d(TAG, "flashModes != null");
+                        String flashMode = parameters.getFlashMode();
+                        if (!Parameters.FLASH_MODE_TORCH.equals(flashMode)) {
+                            Log.d(TAG, "!Parameters.FLASH_MODE_TORCH.equals(flashMode)");
+                            // Turn on the flash
+                            if (flashModes.contains(Parameters.FLASH_MODE_TORCH)) {
+                                Log.d(TAG, "flashModes.contains(Parameters.FLASH_MODE_TORCH)");
+                                parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
+                                mCamera.setParameters(parameters);
+                                mCamera.startPreview();
+                                if (mSharedPreferences.getBoolean(SOUND, false)) playSound(R.raw.on);
+                                startWakeLock();
+                                mButton.setImageResource(R.drawable.buttonon);
+                                lightOn = true;
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-		// Use the screen as a flashlight (next best thing)
-		Log.d(TAG, "FLASH_MODE_TORCH not supported");
-		mButton.setBackgroundColor(COLOR_LIGHT);
-		setBrightness(1f);
-		if (mSharedPreferences.getBoolean(SOUND, false)) playSound(R.raw.on);
-		startWakeLock();
-		lightOn = true;
-	}
+        // Use the screen as a flashlight (next best thing)
+        Log.d(TAG, "FLASH_MODE_TORCH not supported");
+        mButton.setBackgroundColor(COLOR_LIGHT);
+        setBrightness(1f);
+        if (mSharedPreferences.getBoolean(SOUND, false)) playSound(R.raw.on);
+        startWakeLock();
+        mButton.setImageResource(R.drawable.buttonon);
+        lightOn = true;
+    }
 
     private void turnLightOff() {
 //        Toast.makeText(getApplicationContext(), "Off", Toast.LENGTH_SHORT).show();
@@ -233,10 +236,9 @@ public final class Flashlight extends AppCompatActivity implements SurfaceHolder
                                     parameters.setFlashMode(Parameters.FLASH_MODE_OFF);
                                     mCamera.setParameters(parameters);
                                     mCamera.stopPreview();
-                                    if (mSharedPreferences.getBoolean(SOUND, false))
-                                        playSound(R.raw.off);
+                                    if (mSharedPreferences.getBoolean(SOUND, false)) playSound(R.raw.off);
                                     stopWakeLock();
-                                    mButton.setBackgroundColor(COLOR_DARK);
+                                    mButton.setImageResource(R.drawable.buttonoff);
                                     lightOn = false;
                                     return;
                                 }
@@ -251,151 +253,134 @@ public final class Flashlight extends AppCompatActivity implements SurfaceHolder
             setBrightness(-1f);
             if (mSharedPreferences.getBoolean(SOUND, false)) playSound(R.raw.off);
             stopWakeLock();
+            mButton.setImageResource(R.drawable.buttonoff);
             lightOn = false;
         }
     }
 
-	int playSound(int soundId) {
-		MediaPlayer mp = MediaPlayer.create(mContext, soundId);
-		if (mp == null)
-			return 0;
-		mp.setOnCompletionListener(new OnCompletionListener() {
-			public void onCompletion(MediaPlayer mp) {
-				mp.release();
-			};
-		});
-		mp.start();
-		return mp.getDuration();
-	}
+    int playSound(int soundId) {
+        MediaPlayer mp = MediaPlayer.create(mContext, soundId);
+        if (mp == null)
+            return 0;
+        mp.setOnCompletionListener(new OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                mp.release();
+            }
 
-	private void setBrightness(float brightness) {
-		WindowManager.LayoutParams lp = getWindow().getAttributes();
-		lp.screenBrightness = brightness;
-		getWindow().setAttributes(lp);
-	}
+            ;
+        });
+        mp.start();
+        return mp.getDuration();
+    }
 
-	/** Check if this device has a camera flash */
-	private boolean checkCameraHardware(Context context) {
-		if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-			// this device has a camera flash
-			return true;
-		} else {
-			// no camera flash on this device
-			return false;
-		}
-	}
+    private void setBrightness(float brightness) {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.screenBrightness = brightness;
+        getWindow().setAttributes(lp);
+    }
 
-	/** A safe way to get an instance of the Camera object. */
-	public static Camera getCameraInstance() {
-		Camera c = null;
-		try {
+    /**
+     * A safe way to get an instance of the Camera object.
+     */
+    public static Camera getCameraInstance() {
+        Camera c = null;
+        try {
             // attempt to get a Camera instance
-			c = Camera.open();
-		} catch (Exception e) {
-			// Camera is not available (in use or does not exist)
+            c = Camera.open();
+        } catch (Exception e) {
+            // Camera is not available (in use or does not exist)
             e.printStackTrace();
         }
         // returns null if camera is unavailable
-		return c;
-	}
+        return c;
+    }
 
-	@Override
-	public void onStart() {
-		super.onStart();
-	}
-
-	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-		switch (requestCode) {
-			case REQUEST_CAMERA : {
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CAMERA: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                     useCamera = true;
-                else useCamera = false;
-			}
-		}
-	}
+//                else useCamera = false;
+            }
+        }
+    }
 
-	@Override
-	public void onPause() {
-		turnLightOff();
-		if (mCamera != null) {
-			mCamera.release();
-            mCamera = null;
-		}
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mSharedPreferences.getBoolean(AUTOLIGHT, false)) turnLightOn();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        turnLightOff();
         if (mAdView != null) {
             mAdView.pause();
         }
         super.onPause();
-	}
+    }
 
-	@Override
-	public void onResume() {
-		super.onResume();
-        turnLightOn();
-        if (mAdView != null) {
-            mAdView.resume();
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mCamera != null) {
+            mCamera.release();
+            mCamera = null;
         }
-	}
-
-	@Override
-	public void onStop() {
-		turnLightOff();
-		if (mCamera != null) {
-			mCamera.release();
-			mCamera = null;
-		};
         if (mAdView != null) {
             mAdView.destroy();
         }
-		flashlight = null;
-		super.onStop();
-	}
+        flashlight = null;
+        super.onDestroy();
+    }
 
-	@Override
-	public void onDestroy() {
-		turnLightOff();
-		if (mCamera != null) {
-			mCamera.release();
-			mCamera = null;
-		}
-        if (mAdView != null) {
-            mAdView.destroy();
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        // When the search button is long pressed, quit
+        if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+            finish();
+            return true;
         }
-		flashlight = null;
-		super.onDestroy();
-	}
+        return false;
+    }
 
-	@Override
-	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-		// When the search button is long pressed, quit
-		if (keyCode == KeyEvent.KEYCODE_SEARCH) {
-			finish();
-			return true;
-		}
-		return false;
-	}
-
-	public void surfaceCreated(SurfaceHolder holder) {
+    public void surfaceCreated(SurfaceHolder holder) {
         mHolder = holder;
-	}
+    }
 
-	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    }
 
-	public void surfaceDestroyed(SurfaceHolder holder) { }
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        mHolder = null;
+    }
 
-	private void startWakeLock() {
-		if (wakeLock == null) {
-			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-			wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
-		}
-		wakeLock.acquire();
-	}
+    private void startWakeLock() {
+        if (wakeLock == null) {
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+        }
+        wakeLock.acquire();
+    }
 
-	private void stopWakeLock() {
-		if (wakeLock != null) {
-			wakeLock.release();
-		}
-	}
+    private void stopWakeLock() {
+        if (wakeLock != null) {
+            wakeLock.release();
+        }
+    }
 
 
 }

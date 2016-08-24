@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	tools:context=".Setting">
 	<PreferenceCategory android:title="@string/preference_category_features">
 		<CheckBoxPreference android:key="sound" android:defaultValue="true"
 			android:title="@string/sound_title" android:summary="@string/sound_summary" />
-		<CheckBoxPreference android:key="autowidget" android:defaultValue="true"
+		<CheckBoxPreference android:key="autolight" android:defaultValue="false"
 			android:title="@string/autolight_title" android:summary="@string/autolight_summary" />
 	</PreferenceCategory>
 </PreferenceScreen>

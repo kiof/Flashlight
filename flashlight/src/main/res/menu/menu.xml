@@ -5,8 +5,7 @@
 		android:id="@+id/setting"
 		android:icon="@android:drawable/ic_menu_preferences"
 		android:title="@string/menuTitle1"
-		android:titleCondensed="@string/menuTitleCondensed1"
-        app:showAsAction="ifRoom"/>
+		android:titleCondensed="@string/menuTitleCondensed1" />
 
 	<item
         android:id="@+id/share"
