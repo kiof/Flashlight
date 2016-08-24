@@ -10,7 +10,7 @@
 
     <uses-feature
         android:name="android.hardware.Camera"
-        android:required="true" />
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -30,12 +30,7 @@
 
         <activity
             android:name=".Setting"
-            android:parentActivityName=".Flashlight"
             android:screenOrientation="portrait" >
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Flashlight" />
         </activity>
 
         <!--Include the AdActivity configChanges and theme. -->
