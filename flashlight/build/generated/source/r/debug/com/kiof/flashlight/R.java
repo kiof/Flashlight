@@ -2954,8 +2954,9 @@ containing a value of this type.
     public static final class raw {
         public static final int about=0x7f060000;
         public static final int bgmusic=0x7f060001;
-        public static final int off=0x7f060002;
-        public static final int on=0x7f060003;
+        public static final int gtm_analytics=0x7f060002;
+        public static final int off=0x7f060003;
+        public static final int on=0x7f060004;
     }
     public static final class string {
         public static final int Ok=0x7f070029;
@@ -3024,6 +3025,13 @@ containing a value of this type.
         public static final int create_calendar_message=0x7f070055;
         public static final int create_calendar_title=0x7f070056;
         public static final int decline=0x7f070057;
+        public static final int default_web_client_id=0x7f070058;
+        public static final int firebase_database_url=0x7f070059;
+        public static final int gcm_defaultSenderId=0x7f07005a;
+        public static final int google_api_key=0x7f07005b;
+        public static final int google_app_id=0x7f07005c;
+        public static final int google_crash_reporting_api_key=0x7f07005d;
+        public static final int google_storage_bucket=0x7f07005e;
         public static final int menuTitle1=0x7f070030;
         public static final int menuTitle2=0x7f070031;
         public static final int menuTitle3=0x7f070032;
@@ -3045,8 +3053,8 @@ containing a value of this type.
         public static final int sound_summary=0x7f070041;
         public static final int sound_title=0x7f070042;
         public static final int status_bar_notification_info_overflow=0x7f070028;
-        public static final int store_picture_message=0x7f070058;
-        public static final int store_picture_title=0x7f070059;
+        public static final int store_picture_message=0x7f07005f;
+        public static final int store_picture_title=0x7f070060;
         public static final int widget_name=0x7f070043;
     }
     public static final class style {

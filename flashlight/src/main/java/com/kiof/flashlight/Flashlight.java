@@ -31,6 +31,7 @@ import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.io.IOException;
 import java.util.List;
@@ -77,6 +78,8 @@ public final class Flashlight extends AppCompatActivity implements SurfaceHolder
         PreferenceManager.setDefaultValues(mContext, R.xml.setting, false);
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 
+        // AdMob
+        MobileAds.initialize(getApplicationContext(), getString(R.string.ad_unit_id));
         mAdView = (AdView) this.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)

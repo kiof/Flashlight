@@ -112,6 +112,7 @@ public final class R {
 	public static final class layout {
 	}
 	public static final class raw {
+		public static final int gtm_analytics = 0x7f060002;
 	}
 	public static final class string {
 		public static final int accept = 0x7f070050;
@@ -138,8 +139,8 @@ public final class R {
 		public static final int create_calendar_message = 0x7f070055;
 		public static final int create_calendar_title = 0x7f070056;
 		public static final int decline = 0x7f070057;
-		public static final int store_picture_message = 0x7f070058;
-		public static final int store_picture_title = 0x7f070059;
+		public static final int store_picture_message = 0x7f07005f;
+		public static final int store_picture_title = 0x7f070060;
 	}
 	public static final class style {
 		public static final int Theme_IAPTheme = 0x7f09010e;

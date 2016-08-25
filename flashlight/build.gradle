@@ -18,7 +18,23 @@ android {
     }
 }
 dependencies {
+
     compile 'com.google.android.gms:play-services-ads:9.4.0'
     compile 'com.android.support:design:24.2.0'
     compile 'com.android.support:appcompat-v7:24.2.0'
+
 }
+dependencies {
+    // App Compat
+    compile 'com.android.support:design:24.2.0'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    // AdMob
+    compile 'com.google.android.gms:play-services-ads:9.4.0'
+    // Firebase
+    compile 'com.google.firebase:firebase-core:9.4.0'
+    compile 'com.google.firebase:firebase-ads:9.4.0'
+    // Analytics
+    compile 'com.google.android.gms:play-services-analytics:9.4.0'
+}
+// Firebase & Analytics
+apply plugin: 'com.google.gms.google-services'
